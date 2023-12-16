@@ -1,6 +1,6 @@
 #include "gauss.h"
 #include <math.h>
-
+#include <stdio.h>
 /**
  * Zwraca 0 - elimnacja zakonczona sukcesem
  * Zwraca 1 - macierz osobliwa - dzielenie przez 0
@@ -23,7 +23,10 @@ int eliminate(Matrix *mat, Matrix *b){
 	zamienWiersze(&(b->data[(int)(pivot + 1e-6)]), &(b->data[j]));
 
 	// dokonuje eliminacji elementow pod gornym wierszem diagonali pod warunkiem, ze macierz nie jest osobliwa
-	if (wspolczynnik(mat->data[j][j], mat->data[k][j]) == NULL){
+	if (wspolczynnik(mat->data[j][j], mat->data[k][j]) == NAN){
+		return 1;
+	}
+	else {
 	for (k = j;k < mat->r; ++k){
 		mat->data[k][j] -= mat->data[j][j]*wspolczynnik(mat->data[j][j], mat->data[k][j]);
 	}
