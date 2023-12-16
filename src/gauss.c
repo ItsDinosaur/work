@@ -39,12 +39,11 @@ void zamienWiersze(double**a, double**b){
 }
 
 double wspolczynnik (double gorny, double dolny){
-	double wspolczynnik;
 	/*dolny = wspolczynnik * gorny
 	jezeli po zamianie (bo tam bedzie uzywana ta funckja) okaze sie, ze najwiekszym co do modulu wartosci wspolczynnikiem jest 0, to znaczy
 	ze cala rolumna jest zerami, zatem macierz jest osobliwa */
 	if (fabs(gorny) < 1e-6){
-		return NULL;
+		return NAN;
 	}
 	else {
 		return dolny/gorny;
