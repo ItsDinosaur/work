@@ -24,7 +24,7 @@ int eliminate(Matrix *mat, Matrix *b){
 	zamienWiersze(&(b->data[(int)(pivot + 1e-6)]), &(b->data[j]));
 
 	// dokonuje eliminacji elementow pod gornym wierszem diagonali pod warunkiem, ze macierz nie jest osobliwa
-	if (wspolczynnik(mat->data[j][j], mat->data[k][j]) == NAN){
+	if (wspolczynnik(mat->data[j][j], mat->data[k][j]) == -10000){
 		return 1;
 	}
 	else {
@@ -47,7 +47,7 @@ double wspolczynnik (double gorny, double dolny){
 	jezeli po zamianie (bo tam bedzie uzywana ta funckja) okaze sie, ze najwiekszym co do modulu wartosci wspolczynnikiem jest 0, to znaczy
 	ze cala rolumna jest zerami, zatem macierz jest osobliwa */
 	if (fabs(gorny) < 1e-6){
-		return NAN;
+		return -10000;
 	}
 	else {
 		return dolny/gorny;
