@@ -7,8 +7,8 @@
  * Zwraca 1 - macierz osobliwa - dzielenie przez 0
  */
 int eliminate(Matrix *mat, Matrix *b){
-    int i,j = 0,k = 0;
-
+    int i,j = 0,k = 0,l = 0;
+	double wsp;
 	// odwolanie do komorki w macierzy to: mat->data[i][j], gdzie i to wiersz a j to kolumna
 	for (j = 0;j < mat->c; j++){
 		//wybieram pivota ustawiajac wartosc zmiennej pivot na numer wiersza w ktorym sie on znajduje (bo wiadomo ze w kolumnie j)
@@ -27,13 +27,28 @@ int eliminate(Matrix *mat, Matrix *b){
 	if (wspolczynnik(mat->data[j][j], mat->data[k][j]) == -10000){
 		return 1;
 	}
+	
 	else {
-	for (k = j;k < mat->r; ++k){
-		mat->data[k][j] -= mat->data[j][j]*wspolczynnik(mat->data[j][j], mat->data[k][j]);
+		/*
+		i - wskazanie na rzad ktory ma sie nie zmienic juz
+		j - wskazanie na zerowana kolumne
+		k - obenie przetwarzana kolumna (do zerowania elementow w rzedzie l)
+		l - obenie przetwarzany rzad (gdzie a lj bedzie zerem)
+		*/
+	for (i = j; i < mat->r; i++){
+		if (i+1 < mat->r){
+		for (l = i+1; l < mat->r; l++){
+		wsp = wspolczynnik(mat->data[j][j], mat->data[l][j]); //jak nie bedzie dzialac to nie j j tylko i j
+		for (k = j; k < mat->c; k++){
+			mat->data[l][k] -= wsp*(mat->data[i][k]);
+		}
+		b->data[l][0] -= wsp*(b->data[i][0]);
+		}
+		}
 	}
+	return 0;
 	}
-	}
-		return 0;
+}
 }
 
 void zamienWiersze(double**a, double**b){
