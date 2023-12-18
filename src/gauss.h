@@ -8,5 +8,7 @@
  * Zwraca 1 - macierz osobliwa - dzielenie przez 0
  */
 int eliminate(Matrix *mat, Matrix *b);
+void zamienWiersze(double**a, double**b);
+double wspolczynnik (double gorny, double dolny);
 
 #endif

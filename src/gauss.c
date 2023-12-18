@@ -1,6 +1,7 @@
 #include "gauss.h"
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
  * Zwraca 0 - elimnacja zakonczona sukcesem
@@ -24,7 +25,7 @@ int eliminate(Matrix *mat, Matrix *b){
 	zamienWiersze(&(b->data[(int)(pivot + 1e-6)]), &(b->data[j]));
 
 	// dokonuje eliminacji elementow pod gornym wierszem diagonali pod warunkiem, ze macierz nie jest osobliwa
-	if (wspolczynnik(mat->data[j][j], mat->data[k][j]) == -10000){
+	if (wspolczynnik((double)mat->data[j][j], (double)mat->data[k][j]) == -10000.0){
 		return 1;
 	}
 	
@@ -38,7 +39,7 @@ int eliminate(Matrix *mat, Matrix *b){
 	for (i = j; i < mat->r; i++){
 		if (i+1 < mat->r){
 		for (l = i+1; l < mat->r; l++){
-		wsp = wspolczynnik(mat->data[j][j], mat->data[l][j]); //jak nie bedzie dzialac to nie j j tylko i j
+		wsp = wspolczynnik((double)mat->data[j][j], (double)mat->data[l][j]); //jak nie bedzie dzialac to nie j j tylko i j
 		for (k = j; k < mat->c; k++){
 			mat->data[l][k] -= wsp*(mat->data[i][k]);
 		}
@@ -62,7 +63,7 @@ double wspolczynnik (double gorny, double dolny){
 	jezeli po zamianie (bo tam bedzie uzywana ta funckja) okaze sie, ze najwiekszym co do modulu wartosci wspolczynnikiem jest 0, to znaczy
 	ze cala rolumna jest zerami, zatem macierz jest osobliwa */
 	if (fabs(gorny) < 1e-6){
-		return -10000;
+		return -10000.0;
 	}
 	else {
 		return dolny/gorny;
