@@ -10,7 +10,7 @@ int main(int argc, char ** argv) {
 	Matrix * A = readFromFile(argv[1]);
 	Matrix * b = readFromFile(argv[2]);
 	Matrix * x;
-
+	
 	if (A == NULL) return -1;
 	if (b == NULL) return -2;
 	printToScreen(A);
@@ -20,7 +20,7 @@ int main(int argc, char ** argv) {
 	x = createMatrix(b->r, 1);
 	printToScreen(A);
 	printToScreen(b);
-	/*
+	
 	if (x != NULL) {
 		res = backsubst(x,A,b);
 
@@ -29,7 +29,7 @@ int main(int argc, char ** argv) {
 	} else {
 					fprintf(stderr,"Błąd! Nie mogłem utworzyć wektora wynikowego x.\n");
 	}
-*/
+
 	freeMatrix(A);
 	freeMatrix(b);
 

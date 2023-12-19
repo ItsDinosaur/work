@@ -17,17 +17,19 @@ int eliminate(Matrix *mat, Matrix *b){
 		for (k = 0; k < mat->r; k++){
 			if (fabs(mat->data[k][j]) > pivot) pivot = k;
 		}
-
-	// zamieniam kolejnosc wiersza gornego dla tej diagonali oraz tego z pivotem
-	zamienWiersze(&(mat->data[(int)(pivot + 1e-6)]), &(mat->data[j]));
 	
-	// zamieniam rowniez wiersze w macierzy b
-	zamienWiersze(&(b->data[(int)(pivot + 1e-6)]), &(b->data[j]));
+		// zamieniam kolejnosc wiersza gornego dla tej diagonali oraz tego z pivotem
+		zamienWiersze(&(mat->data[(int)(pivot + 1e-6)]), &(mat->data[j]));
+	
+		// zamieniam rowniez wiersze w macierzy b
+		zamienWiersze(&(b->data[(int)(pivot + 1e-6)]), &(b->data[j]));
+	
+		// dokonuje eliminacji elementow pod gornym wierszem diagonali pod warunkiem, ze macierz nie jest osobliwa
 
-	// dokonuje eliminacji elementow pod gornym wierszem diagonali pod warunkiem, ze macierz nie jest osobliwa
-	if (wspolczynnik((double)mat->data[j][j], (double)mat->data[k][j]) == -10000.0){
-		return 1;
-	}
+		// TUTAJ K WYSZLO JUZ POZA ZAKRES I MAZEMY PO PAMIECI !!!
+		if (wspolczynnik((double)mat->data[j][j], (double)mat->data[k][j]) == -10000.0){
+			return 1;
+		}
 	
 	else {
 		/*
@@ -36,6 +38,7 @@ int eliminate(Matrix *mat, Matrix *b){
 		k - obenie przetwarzana kolumna (do zerowania elementow w rzedzie l)
 		l - obenie przetwarzany rzad (gdzie a lj bedzie zerem)
 		*/
+	fprintf(stderr, "Doszedlem\n");
 	for (i = j; i < mat->r; i++){
 		if (i+1 < mat->r){
 		for (l = i+1; l < mat->r; l++){
