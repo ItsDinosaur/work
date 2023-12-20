@@ -25,11 +25,12 @@ int eliminate(Matrix *mat, Matrix *b){
 	zamienWiersze(&(b->data[(int)(pivot + 1e-6)]), &(b->data[j]));
 
 	// dokonuje eliminacji elementow pod gornym wierszem diagonali pod warunkiem, ze macierz nie jest osobliwa
+	for (k = j; k < mat->r; k++){
 	if (wspolczynnik((double)mat->data[j][j], (double)mat->data[k][j]) == -10000.0){
 		return 1;
+		}
 	}
 	
-	else {
 		/*
 		i - wskazanie na rzad ktory ma sie nie zmienic juz
 		j - wskazanie na zerowana kolumne
@@ -49,7 +50,6 @@ int eliminate(Matrix *mat, Matrix *b){
 	}
 	return 0;
 	}
-}
 }
 
 void zamienWiersze(double**a, double**b){
