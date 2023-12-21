@@ -1,6 +1,5 @@
 ## title
-'''
-Praca zrobiona przez:
-Jan Koboska
+\
+###Praca zrobiona przez:\
+Jan Koboska\
 Maciej Rutkowski
-'''
